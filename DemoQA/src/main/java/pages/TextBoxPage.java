@@ -1,6 +1,7 @@
 package pages;
 
 import org.openqa.selenium.By;
+import org.openqa.selenium.JavascriptExecutor;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
 
@@ -31,7 +32,12 @@ public class TextBoxPage extends Page {
 	
 	public void clickSubmit() {
 		WebElement clickSubmit = dr.findElement(By.id("submit"));
+		
+		JavascriptExecutor js = (JavascriptExecutor) dr;
+		js.executeScript("arguments[0].scrollIntoView(true);", clickSubmit);
+		
 		clickSubmit.click();
+		
 
 	}
 	
