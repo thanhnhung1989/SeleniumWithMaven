@@ -7,7 +7,10 @@ import org.openqa.selenium.WebElement;
 
 public class TextBoxPage extends Page {
 	
-
+	public By lblName = By.id("name");
+	public By lblEmail = By.id("email");
+	public By lblcurrentAddress= By.xpath("//p[@id='currentAddress']");
+	
 	public TextBoxPage(WebDriver driverWeb) {
 		super(driverWeb);
 	}
@@ -38,7 +41,18 @@ public class TextBoxPage extends Page {
 		
 		clickSubmit.click();
 		
+	}
+	
+	//get text after submit
+	public String getTextAfterSubmit(By locator) {
+		WebElement e = dr.findElement(locator);
+		String fullText = e.getText();
+		int indexOfColon = fullText.indexOf(":");// lay index cua dau : tu chuoi
+		String expectedResult = fullText.substring(indexOfColon+1);
+		return expectedResult;
 
 	}
+	
+	
 	
 }
