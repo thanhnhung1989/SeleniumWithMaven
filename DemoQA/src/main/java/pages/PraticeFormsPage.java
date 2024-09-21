@@ -7,69 +7,33 @@ import org.openqa.selenium.WebElement;
 
 public class PraticeFormsPage extends Page {
 
+	public By txtFirstName = By.id("firstName");
+	public By txtLastName = By.id("lastName");
+	public By txtEmail = By.id("userEmail");
+	public String genderXpath = "//label[text()='{@param}']";
+	public By txtMobilePhone = By.id("userNumber");
+	public By cbSubjects = By.id("subjectsContainer");
+	public String chkXpathHobbies = "//label[text()='{@param}']";
+	public By txtCurrentAdress = By.id("currentAddress");
+	public By chkXpathState = By.id("state");
+	public By chkXpathCity =  By.id("city");
+	public By uploadPicture = By.id("uploadPicture");
 	public PraticeFormsPage(WebDriver driverWeb) {
 		super(driverWeb);
 	}
-	public void enterFirstName(String firstname) {
-		WebElement elementFirstName = dr.findElement(By.id("firstName"));
-		elementFirstName.sendKeys(firstname);
-	}
-	public void enterLastName(String lastname) {
-		WebElement elementLastName = dr.findElement(By.id("lastName"));
-		elementLastName.sendKeys(lastname);
-	}
-	public void enterEmail(String email) {
-		WebElement elementEmail = dr.findElement(By.xpath("//input[@id='userEmail']"));
-		elementEmail.sendKeys(email);
 
-	}
-	public void chooseGender() {
-		// TODO Auto-generated method stub
 
-	}
-	public void enterMobilePhone(String phone) {
-		WebElement elementPhone = dr.findElement(By.xpath("//input[@id='userNumber']"));
-		elementPhone.sendKeys(phone);
-
-	}
 	public void enterDateofBirth() {
 		// TODO Auto-generated method stub
 
 	}
-	public void enterSubjects(String subjects) {
-		WebElement elementSubjects = dr.findElement(By.id("subjectsContainer"));
-		elementSubjects.sendKeys(subjects);
-	}
-	public void chooseHobbies() {
-		// TODO Auto-generated method stub
 
-	}
-	public void selectPicture() {
-		// TODO Auto-generated method stub
-
-	}
-	public void enterCurrentAddress(String address) {
-		WebElement elementAddress = dr.findElement(By.xpath("//textarea[@id='currentAddress']"));
-		elementAddress.sendKeys(address);
-
-	}
-	public void selectState() {
-		// TODO Auto-generated method stub
-
-	}
-	public void selectCity() {
-		// TODO Auto-generated method stub
-
-	}
-	
 	public void clickSubmit() {
 		WebElement clickSubmit = dr.findElement(By.id("submit"));
-		
 		JavascriptExecutor js = (JavascriptExecutor) dr;
 		js.executeScript("arguments[0].scrollIntoView(true);", clickSubmit);
-		
 		clickSubmit.click();
-		
+
 	}
 
 }

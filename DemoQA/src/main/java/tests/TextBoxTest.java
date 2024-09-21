@@ -11,6 +11,7 @@ import common.TestBase;
 import dev.failsafe.internal.util.Assert;
 import pages.ElementsPage;
 import pages.HomePage;
+import pages.PraticeFormsPage;
 import pages.TextBoxPage;
 
 public class TextBoxTest extends TestCase {
@@ -21,26 +22,30 @@ public class TextBoxTest extends TestCase {
 //		HomePage homePage = new HomePage(testBase.driver);
 //		ElementsPage elementsPage = homePage.clickElements();
 //		TextBoxPage textBoxPage = elementsPage.clickTextBox();
-		
-		openTextBoxPage();
+		TextBoxPage textBoxPage = new TextBoxPage(testBase.driver);
+		textBoxPage.openCheckBoxPage();
 
 		String expectedName = "Tran Thanh Nhung";
 		String expectedEmail = "abc@gmail.com";
-		String expectCurrentAddress = "My dinh 2, Nam Tu Liem, Ha Noi";
-
-		textBoxPage.enterName(expectedName);
-		textBoxPage.enterEmail(expectedEmail);
-		textBoxPage.enterCurrentAddress(expectCurrentAddress);
-
-		textBoxPage.clickSubmit();
-		String actualName = textBoxPage.getTextAfterSubmit(textBoxPage.lblName);
-		assertEquals(actualName,expectedName);
-
-		String actualEmail = textBoxPage.getTextAfterSubmit(textBoxPage.lblEmail);
+		String expectCurrentAddress = "My dinh 2";
+		String expectPermanentAddress = "Nam Tu Liem, Ha Noi";
+		
+		textBoxPage.testBase.inputText(textBoxPage.txtName, expectedName);
+		textBoxPage.testBase.inputText(textBoxPage.txtEmail, expectedEmail);
+		textBoxPage.testBase.inputText(textBoxPage.txtcurrentAddress, expectCurrentAddress);
+		textBoxPage.testBase.inputText(textBoxPage.txtPermanentAddress, expectPermanentAddress);
+		
+		String actualName = textBoxPage.getTextAfterSubmit(textBoxPage.txtName);
+		assertEquals(actualName, expectedEmail);
+		
+		String actualEmail = textBoxPage.getTextAfterSubmit(textBoxPage.txtEmail);
 		assertEquals(actualEmail, expectedEmail);
 
-		String actualCurrentAddress = textBoxPage.getTextAfterSubmit(textBoxPage.lblcurrentAddress);
+		String actualCurrentAddress = textBoxPage.getTextAfterSubmit(textBoxPage.txtcurrentAddress);
 		assertEquals(actualCurrentAddress, expectCurrentAddress);
+		
+		String actualPermanentAddress = textBoxPage.getTextAfterSubmit(textBoxPage.txtPermanentAddress);
+		assertEquals(actualPermanentAddress, expectPermanentAddress);
 	}
 
 	// @Test(groups = "validation case")

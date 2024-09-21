@@ -2,28 +2,44 @@ package tests;
 
 import org.testng.annotations.Test;
 
+import pages.PraticeFormsPage;
+
 public class PraticeFormsTest extends TestCase {
 
 	@Test
 	public void testClickSubmit() {
-		openPraticeForms();
+		PraticeFormsPage praticeFormsPage = new PraticeFormsPage(testBase.driver);
+		praticeFormsPage.openPraticeForms();
 
-		String expectedFirstName = "Nhung";
-		String expectedLastName = "Tran ";
-		String expectedEmail = "abc@gmail.com";
-		String expectedPhone = "0789878987";
-		String expectedSubjects = "Nhung test abc";
-		String expectCurrentAddress = "My dinh 2, Nam Tu Liem, Ha Noi";
+		String firstName = "Nhung";
+		String lastName = "Tran ";
+		String email = "abc@gmail.com";
+		String gender = "Male";
+		String mobilePhone = "0789878987";
+		String subjects = "Maths, English";
+		String hobbies = "Sports, Reading, Music";
+		String uploadPicture = "DemoQA\\image\\anh1.png";
+		String currentAddress = "My dinh 2, Nam Tu Liem, Ha Noi";
+		String state = "NCR";
+		String city = "Delhi";
 		
-		praticeForms.enterFirstName(expectedFirstName);
-		praticeForms.enterLastName(expectedLastName);
-		praticeForms.enterEmail(expectedEmail);
-		praticeForms.enterMobilePhone(expectedPhone);
-		praticeForms.enterSubjects(expectedSubjects);
-		praticeForms.enterCurrentAddress(expectCurrentAddress);
 		
-		praticeForms.clickSubmit();
+		praticeFormsPage.testBase.inputText(praticeFormsPage.txtFirstName,firstName);
+		praticeFormsPage.testBase.inputText(praticeFormsPage.txtLastName,lastName);
+		praticeFormsPage.testBase.inputText(praticeFormsPage.txtEmail,email);
+		praticeFormsPage.testBase.selectRadioButton(praticeFormsPage.genderXpath,gender);
+		praticeFormsPage.testBase.inputText(praticeFormsPage.txtMobilePhone, mobilePhone);
+		praticeFormsPage.testBase.inputValuesToCombobox(praticeFormsPage.cbSubjects,subjects);
+		praticeFormsPage.testBase.selectCheckbox(praticeFormsPage.chkXpathHobbies,hobbies);
 		
+		praticeFormsPage.testBase.inputText(praticeFormsPage.txtCurrentAdress, currentAddress);
+		praticeFormsPage.testBase.selectFromDropdown(praticeFormsPage.chkXpathState, state);
+		praticeFormsPage.testBase.selectFromDropdown(praticeFormsPage.chkXpathCity, city);
+		
+		
+	
+//		praticeForms.clickSubmit();
+	
 
 	}
 }
