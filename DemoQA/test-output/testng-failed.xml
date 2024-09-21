@@ -5,6 +5,7 @@
     <classes>
       <class name="tests.TextBoxTest">
         <methods>
+          <include name="setUp"/>
           <include name="SubmitSuccessfully"/>
         </methods>
       </class> <!-- tests.TextBoxTest -->
