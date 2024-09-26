@@ -2,20 +2,20 @@
 <testng-results ignored="0" total="1" passed="1" failed="0" skipped="0">
   <reporter-output>
   </reporter-output>
-  <suite started-at="2024-09-21T16:26:49 ICT" name="Default suite" finished-at="2024-09-21T16:27:30 ICT" duration-ms="40649">
+  <suite started-at="2024-09-26T15:37:34 ICT" name="Default suite" finished-at="2024-09-26T15:37:58 ICT" duration-ms="23554">
     <groups>
     </groups>
-    <test started-at="2024-09-21T16:26:49 ICT" name="Default test" finished-at="2024-09-21T16:27:30 ICT" duration-ms="40649">
-      <class name="tests.CheckBoxTest">
-        <test-method is-config="true" signature="setUp()[pri:0, instance:tests.CheckBoxTest@729d991e]" started-at="2024-09-21T16:26:49 ICT" name="setUp" finished-at="2024-09-21T16:27:04 ICT" duration-ms="14880" status="PASS">
+    <test started-at="2024-09-26T15:37:34 ICT" name="Default test" finished-at="2024-09-26T15:37:58 ICT" duration-ms="23554">
+      <class name="tests.PraticeFormsTest">
+        <test-method is-config="true" signature="setUp()[pri:0, instance:tests.PraticeFormsTest@4efac082]" started-at="2024-09-26T15:37:34 ICT" name="setUp" finished-at="2024-09-26T15:37:43 ICT" duration-ms="8426" status="PASS">
           <reporter-output>
           </reporter-output>
         </test-method> <!-- setUp -->
-        <test-method signature="verifyCheckBox()[pri:0, instance:tests.CheckBoxTest@729d991e]" started-at="2024-09-21T16:27:04 ICT" name="verifyCheckBox" finished-at="2024-09-21T16:27:30 ICT" duration-ms="25722" status="PASS">
+        <test-method signature="testClickSubmit()[pri:0, instance:tests.PraticeFormsTest@4efac082]" started-at="2024-09-26T15:37:43 ICT" name="testClickSubmit" finished-at="2024-09-26T15:37:58 ICT" duration-ms="15078" status="PASS">
           <reporter-output>
           </reporter-output>
-        </test-method> <!-- verifyCheckBox -->
-      </class> <!-- tests.CheckBoxTest -->
+        </test-method> <!-- testClickSubmit -->
+      </class> <!-- tests.PraticeFormsTest -->
     </test> <!-- Default test -->
   </suite> <!-- Default suite -->
 </testng-results>
