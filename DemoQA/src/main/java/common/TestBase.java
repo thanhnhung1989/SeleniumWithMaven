@@ -99,20 +99,21 @@ public class TestBase {
 			String year) {
 		WebElement eInputDate = driver.findElement(openDateDialogLocator);
 		eInputDate.click();
-		// Select date
-		// By dayLocator = getDayLocator(day);
-		WebElement drDay = driver.findElement(
-				By.xpath("//div[contains(@class,'react-datepicker__day') and contains(text(),'" + day + "')]"));
-		drDay.click();
-		// Select month
-		WebElement drMonth = driver.findElement(monthLocator);
-		Select drMonthSelect = new Select(drMonth);
-		drMonthSelect.selectByVisibleText(month);
 		// Select year
 		WebElement drYear = driver.findElement(yearLocator);
 		Select drYearselect = new Select(drYear);
 		drYearselect.selectByVisibleText(year);
+		// Select month
+		WebElement drMonth = driver.findElement(monthLocator);
+		Select drMonthSelect = new Select(drMonth);
+		drMonthSelect.selectByVisibleText(month);
+		// Select day
+		WebElement drDay = driver.findElement(By.xpath(
+				"//div[contains(@class,'react-datepicker__day') and not(contains(@class,'outside-month')) and text()='"
+						+ day + "']"));
+		drDay.click();
 	}
+
 	public void selectFromDropDown(By dropdownLocator, String optionText) {
 		// Tìm và click vào dropdown để mở
 		WebElement dropdownElement = driver.findElement(dropdownLocator);
@@ -125,10 +126,14 @@ public class TestBase {
 		// Click vào tùy chọn
 		option.click();
 	}
-// the: input, textarea, select, button
+
 	public String getTextAfterSubmit(By locator) {
 		WebElement e = driver.findElement(locator);
-		return e.getAttribute("value");
+		String fullText = e.getText();
+		int indexOfColon = fullText.indexOf(":");// tìm vị trí cua dau : tu chuoi
+		String expetedResult = fullText.substring(indexOfColon + 1);
+		return expetedResult;
+
 	}
 
 	public boolean isRadioSelected(String radioXpath, String radioValue) {
@@ -138,14 +143,19 @@ public class TestBase {
 	}
 
 	public String getTextAfterSubmit2(By locator) {
-		 WebElement e = driver.findElement(locator);
+		WebElement e = driver.findElement(locator);
 		return e.getText(); // Dùng getText() để lấy nội dung bên trong thẻ <td>
 	}
-	public String[] splitValue (String combinedValue) {
-		return combinedValue.split(" ");
+
+	public String[] splitValue(String combinedValue, String delimiter) {
+		if (combinedValue == null || combinedValue.isEmpty()) {
+			return new String[0];// Trả về mảng rỗng nếu chuỗi đầu vào null hoặc rỗng
+		}
+		return combinedValue.split(delimiter);
 	}
+
 	public String nomalizeString(String input) {
-		if (input==null) {
+		if (input == null) {
 			return null;
 		}
 		return input.replaceAll("\\s+", "").toLowerCase();

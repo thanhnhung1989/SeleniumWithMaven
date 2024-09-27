@@ -17,9 +17,9 @@ public class PraticeFormsPage extends Page {
 	public By txtEmail = By.id("userEmail");
 	public String genderXpath = "//label[text()='{@param}']";
 	public By txtMobilePhone = By.id("userNumber");
-//	public By DateDialogLocator = By.id("dateOfBirthInput");
-//	public By monthLocator = By.xpath("//*[@class='react-datepicker__month-select']");
-//	public By yearLocator = By.xpath("//*[@class='react-datepicker__year-select']");
+	public By DateDialogLocator = By.id("dateOfBirthInput");
+	public By monthLocator = By.xpath("//*[@class='react-datepicker__month-select']");
+	public By yearLocator = By.xpath("//*[@class='react-datepicker__year-select']");
 	public By cbSubjects = By.id("subjectsInput");
 	public String chkXpathHobbies = "//label[text()='{@param}']";
 	public By uploadPicture = By.id("uploadPicture");
@@ -32,6 +32,7 @@ public class PraticeFormsPage extends Page {
 	public By emailAfterSubmit = By.xpath("//td[text()='Student Email']/following::td[1]");
 	public By genderAfterSubmit = By.xpath("//td[text()='Gender']/following::td[1]");
 	public By mobilePhoneAfterSubmit = By.xpath("//td[text()='Mobile']/following::td[1]");
+	public By dateOfBirhAfterSubmit = By.xpath("//td[text()='Date of Birth']/following::td[1]");
 	public By cbSubjectAfterSubmit = By.xpath("//td[text()='Subjects']/following::td[1]");
 	public By chkHobbiesAfterSubmit = By.xpath("//td[text()='Hobbies']/following::td[1]");
 	public By nameImageAterSubmit = By.xpath("//td[text()='Picture']/following::td[1]");
@@ -41,10 +42,6 @@ public class PraticeFormsPage extends Page {
 	public PraticeFormsPage(WebDriver driverWeb) {
 		super(driverWeb);
 	}
-
-//	public By optionLocator(String state) {
-//	    return By.xpath("//div[text()='" + state + "']");
-//	}
 
 	public void clickSubmit() {
 		WebElement clickSubmit = dr.findElement(By.id("submit"));
