@@ -23,34 +23,34 @@ public class TextBoxTest extends TestCase {
 //		ElementsPage elementsPage = homePage.clickElements();
 //		TextBoxPage textBoxPage = elementsPage.clickTextBox();
 		TextBoxPage textBoxPage = new TextBoxPage(testBase.driver);
-		textBoxPage.openCheckBoxPage();
+		textBoxPage.openTextBoxPage();
 
 		String expectedName = "Tran Thanh Nhung";
-		String expectedEmail = "abc@gmail.com";
+		String expectedEmail = "abcgmail.com";
 		String expectCurrentAddress = "My dinh 2";
 		String expectPermanentAddress = "Nam Tu Liem, Ha Noi";
+		String expectColor = "#ced4da";
 		
 		textBoxPage.testBase.inputText(textBoxPage.txtName, expectedName);
 		textBoxPage.testBase.inputText(textBoxPage.txtEmail, expectedEmail);
 		textBoxPage.testBase.inputText(textBoxPage.txtcurrentAddress, expectCurrentAddress);
 		textBoxPage.testBase.inputText(textBoxPage.txtPermanentAddress, expectPermanentAddress);
+		textBoxPage.clickSubmit();
 		
-		String actualName = textBoxPage.getTextAfterSubmit(textBoxPage.txtName);
-		assertEquals(actualName, expectedEmail);
+		String actualName = textBoxPage.testBase.getTextAfterSubmit(textBoxPage.txtName);
+		assertEquals(actualName, expectedName);
 		
-		String actualEmail = textBoxPage.getTextAfterSubmit(textBoxPage.txtEmail);
+		String actualEmail = textBoxPage.testBase.getTextAfterSubmit(textBoxPage.txtEmail);
 		assertEquals(actualEmail, expectedEmail);
 
-		String actualCurrentAddress = textBoxPage.getTextAfterSubmit(textBoxPage.txtcurrentAddress);
+		String actualCurrentAddress = textBoxPage.testBase.getTextAfterSubmit(textBoxPage.txtcurrentAddress);
 		assertEquals(actualCurrentAddress, expectCurrentAddress);
 		
-		String actualPermanentAddress = textBoxPage.getTextAfterSubmit(textBoxPage.txtPermanentAddress);
+		String actualPermanentAddress = textBoxPage.testBase.getTextAfterSubmit(textBoxPage.txtPermanentAddress);
 		assertEquals(actualPermanentAddress, expectPermanentAddress);
-	}
-
-	// @Test(groups = "validation case")
-	public void validateEmailFormat() {
-
-	}
+		
+		String actualColor = textBoxPage.testBase.validateEmailFormat(textBoxPage.color);
+		assertEquals(actualColor, expectColor);
+		}
 
 }
