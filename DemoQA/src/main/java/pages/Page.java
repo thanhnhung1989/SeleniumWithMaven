@@ -19,20 +19,20 @@ public class Page {
 	public TextBoxPage openTextBoxPage() {
 
 		dr.navigate().to("https://demoqa.com/text-box");
-		textBoxPage = new TextBoxPage(testBase.driver);
+		textBoxPage = new TextBoxPage(dr);
 		return textBoxPage;
 	}
 
 	public CheckBoxPage openCheckBoxPage() {
 
 		dr.navigate().to("https://demoqa.com/checkbox");
-		checkBoxPage = new CheckBoxPage(testBase.driver);
+		checkBoxPage = new CheckBoxPage(dr);
 		return checkBoxPage;
 	}
 
 	public PraticeFormsPage openPraticeForms() {
 		dr.navigate().to("https://demoqa.com/automation-practice-form");
-		praticeForms = new PraticeFormsPage(testBase.driver);
+		praticeForms = new PraticeFormsPage(dr);
 		return praticeForms;
 
 	}

@@ -6,6 +6,7 @@ import org.openqa.selenium.By;
 import org.openqa.selenium.JavascriptExecutor;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
+import org.openqa.selenium.support.Color;
 import org.openqa.selenium.support.ui.ExpectedConditions;
 import org.openqa.selenium.support.ui.Select;
 import org.openqa.selenium.support.ui.WebDriverWait;
@@ -48,8 +49,7 @@ public class PraticeFormsPage extends Page {
 		testBase.inputText(txtEmail, studentRegister.email);
 		testBase.selectRadioButton(genderXpath, studentRegister.gender);
 		testBase.inputText(txtMobilePhone, studentRegister.mobilePhone);
-		testBase.inputDate(DateDialogLocator, monthLocator, yearLocator, studentRegister.dayOfBirthday,
-				studentRegister.monthOfBirthday, studentRegister.yearOfBirthday);
+		testBase.inputDate(DateDialogLocator, monthLocator, yearLocator, studentRegister.dateOfBirth);
 		testBase.inputValuesToCombobox(cbSubjects, studentRegister.subjects);
 		testBase.selectCheckbox(chkXpathHobbies, studentRegister.hobbies);
 		testBase.uploadPicture(studentRegister.uploadPicture);
@@ -76,5 +76,19 @@ public class PraticeFormsPage extends Page {
 			return new String[0];// Trả về mảng rỗng nếu chuỗi đầu vào null hoặc rỗng
 		}
 		return combinedValue.split(delimiter);
+	}
+	public String getCssValue (WebElement element, String cssProperty) {
+		return element.getCssValue(cssProperty);
+	}
+	public boolean getCssBorderValue(By byLocator, String expectedColor) {
+		WebElement elment = dr.findElement(byLocator);
+		String cssColor = elment.getCssValue("border-color");
+
+		String actualColor = Color.fromString(cssColor).asHex();
+
+		if (actualColor.equals(expectedColor)) {
+			return true;
+		}
+		return false;
 	}
 }

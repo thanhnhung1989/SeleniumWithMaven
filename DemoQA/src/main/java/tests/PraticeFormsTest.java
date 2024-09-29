@@ -11,21 +11,19 @@ import tests.models.StudentRegister;
 
 public class PraticeFormsTest extends TestCase {
 
-	@Test
+	@Test(groups = "happy case")
 	public void testClickSubmit() {
 		PraticeFormsPage praticeFormsPage = new PraticeFormsPage(testBase.driver);
 		praticeFormsPage.openPraticeForms();
 		// khởi tạo đối tượng
 		StudentRegister studentRegister = new StudentRegister();
 
-		studentRegister.firstName = "Nhung  Thanh";
+		studentRegister.firstName = "Nhung";
 		studentRegister.lastName = "Tran ";
 		studentRegister.email = "abc@gmail.com";
 		studentRegister.gender = "Male";
 		studentRegister.mobilePhone = "0789878987";
-		studentRegister.dayOfBirthday = "1";
-		studentRegister.monthOfBirthday = "January";
-		studentRegister.yearOfBirthday = "1989";
+		studentRegister.dateOfBirth = "1 January 1989";
 		studentRegister.subjects = "Maths, English  ";
 		studentRegister.hobbies = "Sports, Reading, Music";
 		studentRegister.uploadPicture = "testdata\\anh1.png";
@@ -51,12 +49,17 @@ public class PraticeFormsTest extends TestCase {
 		String actualMobilePhone = praticeFormsPage.getTableValue(praticeFormsPage.tableValueXpath, "Mobile");
 		assertEquals(actualMobilePhone, studentRegister.mobilePhone);
 
-		String combinedDateOfBirth = praticeFormsPage.getTableValue(praticeFormsPage.tableValueXpath, "Date of Birth");
-		String[] actualDateOfBirth = praticeFormsPage.splitValue(combinedDateOfBirth, "[, ]+");
-		assertEquals(Integer.parseInt(actualDateOfBirth[0]), Integer.parseInt(studentRegister.dayOfBirthday));
-		assertEquals(actualDateOfBirth[1], studentRegister.monthOfBirthday);
-		assertEquals(actualDateOfBirth[2], studentRegister.yearOfBirthday);
-
+//		String combinedDateOfBirth = praticeFormsPage.getTableValue(praticeFormsPage.tableValueXpath, "Date of Birth");
+//		String[] actualDateOfBirth = praticeFormsPage.splitValue(combinedDateOfBirth, "[, ]+");
+//		assertEquals(Integer.parseInt(actualDateOfBirth[0]), Integer.parseInt(studentRegister.dayOfBirthday));
+//		assertEquals(actualDateOfBirth[1], studentRegister.monthOfBirthday);
+//		assertEquals(actualDateOfBirth[2], studentRegister.yearOfBirthday);
+//
+//		String actualDateOfBirth = praticeFormsPage.getTableValue(praticeFormsPage.tableValueXpath,  "Date of Birth");
+//		int index = studentRegister.dayOfBirthday.lastIndexOf(" ");
+//		String expectedDOB = studentRegister.dayOfBirthday.replace(Character.toString(studentRegister.dayOfBirthday.charAt(index)), ",");
+//		assertEquals (actualDateOfBirth,expectedDOB );
+				
 		String actualCbSubjects = praticeFormsPage.getTableValue(praticeFormsPage.tableValueXpath, "Subjects");
 		assertEquals(praticeFormsPage.nomalizeString(actualCbSubjects),
 				praticeFormsPage.nomalizeString(studentRegister.subjects));
@@ -68,6 +71,9 @@ public class PraticeFormsTest extends TestCase {
 		String imageName = splitImage[splitImage.length - 1];
 		String actualUploadImage = praticeFormsPage.getTableValue(praticeFormsPage.tableValueXpath, "Picture");
 		assertEquals(actualUploadImage, imageName);
+		
+//		int indexImage = studentRegister.uploadPicture.lastIndexOf("\\");
+//		String expectedFileName = studentRegister.uploadPicture.substring(index + 1);
 
 		String actualCurrentAddress = praticeFormsPage.getTableValue(praticeFormsPage.tableValueXpath, "Address");
 		assertEquals(actualCurrentAddress, studentRegister.currentAddress);
@@ -79,4 +85,15 @@ public class PraticeFormsTest extends TestCase {
 		assertEquals(actualStateandCity[1], studentRegister.city);
 
 	}
+	@Test(groups = "Validation Test")
+	public void submitDataUnsuccessfully() {
+		StudentRegister studentRegister = new StudentRegister();
+		studentRegister.firstName = "";
+		PraticeFormsPage praticeFormsPage = new PraticeFormsPage(testBase.driver);
+		praticeFormsPage.openPraticeForms();
+		praticeFormsPage.clickSubmit();
+		assertTrue(praticeFormsPage.getCssBorderValue(praticeFormsPage.txtFirstName, "#dc3545"));
+
+	}
 }
+

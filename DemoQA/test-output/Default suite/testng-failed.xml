@@ -5,6 +5,7 @@
     <classes>
       <class name="tests.PraticeFormsTest">
         <methods>
+          <include name="submitDataUnsuccessfully"/>
           <include name="setUp"/>
           <include name="testClickSubmit"/>
         </methods>

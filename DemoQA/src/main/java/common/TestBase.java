@@ -91,22 +91,22 @@ public class TestBase {
 
 	}
 
-	public void inputDate(By openDateDialogLocator, By monthLocator, By yearLocator, String day, String month,
-			String year) {
+	public void inputDate(By openDateDialogLocator, By monthLocator, By yearLocator, String dateOfBirth) {
+		String[] dates = dateOfBirth.split(" ");
 		WebElement eInputDate = driver.findElement(openDateDialogLocator);
 		eInputDate.click();
 		// Select year
 		WebElement drYear = driver.findElement(yearLocator);
 		Select drYearselect = new Select(drYear);
-		drYearselect.selectByVisibleText(year);
+		drYearselect.selectByVisibleText(dates[2]);
 		// Select month
 		WebElement drMonth = driver.findElement(monthLocator);
 		Select drMonthSelect = new Select(drMonth);
-		drMonthSelect.selectByVisibleText(month);
+		drMonthSelect.selectByVisibleText(dates[1]);
 		// Select day
 		WebElement drDay = driver.findElement(By.xpath(
 				"//div[contains(@class,'react-datepicker__day') and not(contains(@class,'outside-month')) and text()='"
-						+ day + "']"));
+						+ dates[0] + "']"));
 		drDay.click();
 	}
 
