@@ -2,16 +2,16 @@
 <testng-results ignored="0" total="1" passed="1" failed="0" skipped="0">
   <reporter-output>
   </reporter-output>
-  <suite started-at="2024-09-27T14:08:11 ICT" name="Default suite" finished-at="2024-09-27T14:08:38 ICT" duration-ms="26985">
+  <suite started-at="2024-09-28T10:44:07 ICT" name="Default suite" finished-at="2024-09-28T10:44:41 ICT" duration-ms="33939">
     <groups>
     </groups>
-    <test started-at="2024-09-27T14:08:11 ICT" name="Default test" finished-at="2024-09-27T14:08:38 ICT" duration-ms="26985">
+    <test started-at="2024-09-28T10:44:07 ICT" name="Default test" finished-at="2024-09-28T10:44:41 ICT" duration-ms="33939">
       <class name="tests.PraticeFormsTest">
-        <test-method is-config="true" signature="setUp()[pri:0, instance:tests.PraticeFormsTest@4efac082]" started-at="2024-09-27T14:08:11 ICT" name="setUp" finished-at="2024-09-27T14:08:20 ICT" duration-ms="9774" status="PASS">
+        <test-method is-config="true" signature="setUp()[pri:0, instance:tests.PraticeFormsTest@4efac082]" started-at="2024-09-28T10:44:07 ICT" name="setUp" finished-at="2024-09-28T10:44:14 ICT" duration-ms="6979" status="PASS">
           <reporter-output>
           </reporter-output>
         </test-method> <!-- setUp -->
-        <test-method signature="testClickSubmit()[pri:0, instance:tests.PraticeFormsTest@4efac082]" started-at="2024-09-27T14:08:20 ICT" name="testClickSubmit" finished-at="2024-09-27T14:08:38 ICT" duration-ms="17159" status="PASS">
+        <test-method signature="testClickSubmit()[pri:0, instance:tests.PraticeFormsTest@4efac082]" started-at="2024-09-28T10:44:14 ICT" name="testClickSubmit" finished-at="2024-09-28T10:44:41 ICT" duration-ms="26916" status="PASS">
           <reporter-output>
           </reporter-output>
         </test-method> <!-- testClickSubmit -->

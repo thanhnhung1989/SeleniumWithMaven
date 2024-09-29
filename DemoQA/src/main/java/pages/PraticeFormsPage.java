@@ -10,6 +10,8 @@ import org.openqa.selenium.support.ui.ExpectedConditions;
 import org.openqa.selenium.support.ui.Select;
 import org.openqa.selenium.support.ui.WebDriverWait;
 
+import tests.models.StudentRegister;
+
 public class PraticeFormsPage extends Page {
 
 	public By txtFirstName = By.id("firstName");
@@ -27,18 +29,8 @@ public class PraticeFormsPage extends Page {
 	public By chkXpathState = By.id("state");
 	public By chkXpathCity = By.id("city");
 
-	
-	public By nameAfterSubmit = By.xpath("//td[text()='Student Name']/following::td[1]");
-	public By emailAfterSubmit = By.xpath("//td[text()='Student Email']/following::td[1]");
-	public By genderAfterSubmit = By.xpath("//td[text()='Gender']/following::td[1]");
-	public By mobilePhoneAfterSubmit = By.xpath("//td[text()='Mobile']/following::td[1]");
-	public By dateOfBirhAfterSubmit = By.xpath("//td[text()='Date of Birth']/following::td[1]");
-	public By cbSubjectAfterSubmit = By.xpath("//td[text()='Subjects']/following::td[1]");
-	public By chkHobbiesAfterSubmit = By.xpath("//td[text()='Hobbies']/following::td[1]");
-	public By nameImageAterSubmit = By.xpath("//td[text()='Picture']/following::td[1]");
-	public By currentAdressAterSubmit = By.xpath("//td[text()='Address']/following::td[1]");
-	public By chkStateAndCityAterSubmit = By.xpath("//td[text()='State and City']/following::td[1]");
-	
+	public String tableValueXpath = "//td[text()='{@param}']/following::td[1]";
+
 	public PraticeFormsPage(WebDriver driverWeb) {
 		super(driverWeb);
 	}
@@ -48,5 +40,41 @@ public class PraticeFormsPage extends Page {
 		JavascriptExecutor js = (JavascriptExecutor) dr;
 		js.executeScript("arguments[0].scrollIntoView(true);", clickSubmit);
 		clickSubmit.click();
+	}
+
+	public void inputData(StudentRegister studentRegister) {
+		testBase.inputText(txtFirstName, studentRegister.firstName);
+		testBase.inputText(txtLastName, studentRegister.lastName);
+		testBase.inputText(txtEmail, studentRegister.email);
+		testBase.selectRadioButton(genderXpath, studentRegister.gender);
+		testBase.inputText(txtMobilePhone, studentRegister.mobilePhone);
+		testBase.inputDate(DateDialogLocator, monthLocator, yearLocator, studentRegister.dayOfBirthday,
+				studentRegister.monthOfBirthday, studentRegister.yearOfBirthday);
+		testBase.inputValuesToCombobox(cbSubjects, studentRegister.subjects);
+		testBase.selectCheckbox(chkXpathHobbies, studentRegister.hobbies);
+		testBase.uploadPicture(studentRegister.uploadPicture);
+		testBase.inputText(txtCurrentAdress, studentRegister.currentAddress);
+		testBase.selectFromDropDown(chkXpathState, studentRegister.state);
+		testBase.selectFromDropDown(chkXpathCity, studentRegister.city);
+	}
+
+	public String getTableValue(String xpath, String fieldName) {
+		String newXpath = xpath.replace("{@param}", fieldName);
+		WebElement e = dr.findElement(By.xpath(newXpath));
+		return e.getText(); // Dùng getText() để lấy nội dung bên trong thẻ <td>
+	}
+
+	public String nomalizeString(String input) {
+		if (input == null) {
+			return "";
+		}
+		return input.replaceAll("\\s+", "").toLowerCase();
+	}
+
+	public String[] splitValue(String combinedValue, String delimiter) {
+		if (combinedValue == null || combinedValue.isEmpty()) {
+			return new String[0];// Trả về mảng rỗng nếu chuỗi đầu vào null hoặc rỗng
+		}
+		return combinedValue.split(delimiter);
 	}
 }

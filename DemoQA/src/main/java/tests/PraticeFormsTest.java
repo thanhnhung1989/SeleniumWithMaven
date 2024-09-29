@@ -7,6 +7,7 @@ import org.openqa.selenium.By;
 import org.testng.annotations.Test;
 
 import pages.PraticeFormsPage;
+import tests.models.StudentRegister;
 
 public class PraticeFormsTest extends TestCase {
 
@@ -14,88 +15,68 @@ public class PraticeFormsTest extends TestCase {
 	public void testClickSubmit() {
 		PraticeFormsPage praticeFormsPage = new PraticeFormsPage(testBase.driver);
 		praticeFormsPage.openPraticeForms();
+		// khởi tạo đối tượng
+		StudentRegister studentRegister = new StudentRegister();
 
-		String firstName = "Nhung  Thanh";
-		String lastName = "Tran ";
-		String email = "abc@gmail.com";
-		String gender = "Male";
-		String mobilePhone = "0789878987";
-		String dayOfBirthday = "1";
-		String monthOfBirthday = "January";
-		String yearOfBirthday = "1989";
-		String subjects = "Maths, English  ";
-		String hobbies = "Sports, Reading, Music";
-		String uploadPicture = "image\\anh1.png";
-		String currentAddress = "My dinh 2, Nam Tu Liem, Ha Noi";
-		String state = "NCR";
-		String city = "Delhi";
+		studentRegister.firstName = "Nhung  Thanh";
+		studentRegister.lastName = "Tran ";
+		studentRegister.email = "abc@gmail.com";
+		studentRegister.gender = "Male";
+		studentRegister.mobilePhone = "0789878987";
+		studentRegister.dayOfBirthday = "1";
+		studentRegister.monthOfBirthday = "January";
+		studentRegister.yearOfBirthday = "1989";
+		studentRegister.subjects = "Maths, English  ";
+		studentRegister.hobbies = "Sports, Reading, Music";
+		studentRegister.uploadPicture = "testdata\\anh1.png";
+		studentRegister.currentAddress = "My dinh 2, Nam Tu Liem, Ha Noi";
+		studentRegister.state = "NCR";
+		studentRegister.city = "Delhi";
 
-		praticeFormsPage.testBase.inputText(praticeFormsPage.txtFirstName, firstName);
-		praticeFormsPage.testBase.inputText(praticeFormsPage.txtLastName, lastName);
-		praticeFormsPage.testBase.inputText(praticeFormsPage.txtEmail, email);
-		praticeFormsPage.testBase.selectRadioButton(praticeFormsPage.genderXpath, gender);
-		praticeFormsPage.testBase.inputText(praticeFormsPage.txtMobilePhone, mobilePhone);
-		praticeFormsPage.testBase.inputDate(praticeFormsPage.DateDialogLocator, praticeFormsPage.monthLocator,
-				praticeFormsPage.yearLocator, dayOfBirthday, monthOfBirthday, yearOfBirthday);
-		praticeFormsPage.testBase.inputValuesToCombobox(praticeFormsPage.cbSubjects, subjects);
-		praticeFormsPage.testBase.selectCheckbox(praticeFormsPage.chkXpathHobbies, hobbies);
-		praticeFormsPage.testBase.uploadPicture(uploadPicture);
-		praticeFormsPage.testBase.inputText(praticeFormsPage.txtCurrentAdress, currentAddress);
-		praticeFormsPage.testBase.selectFromDropDown(praticeFormsPage.chkXpathState, state);
-		praticeFormsPage.testBase.selectFromDropDown(praticeFormsPage.chkXpathCity, city);
+		// truyền đối tượng studentRegister vào hàm inputData
+		praticeFormsPage.inputData(studentRegister);
 
 		praticeFormsPage.clickSubmit();
 
-		String expectedName = firstName + " " + lastName;
-		String actualName = praticeFormsPage.testBase.getTextAfterSubmit2(praticeFormsPage.nameAfterSubmit).trim();
-		assertEquals(praticeFormsPage.testBase.nomalizeString(actualName),
-				praticeFormsPage.testBase.nomalizeString(expectedName));
+		String expectedName = studentRegister.firstName + " " + studentRegister.lastName;
+		String actualName = praticeFormsPage.getTableValue(praticeFormsPage.tableValueXpath, "Student Name");
+		assertEquals(praticeFormsPage.nomalizeString(actualName), praticeFormsPage.nomalizeString(expectedName));
 
-		String actualEmail = praticeFormsPage.testBase.getTextAfterSubmit2(praticeFormsPage.emailAfterSubmit);
-		assertEquals(actualEmail, email);
+		String actualEmail = praticeFormsPage.getTableValue(praticeFormsPage.tableValueXpath, "Student Email");
+		assertEquals(actualEmail, studentRegister.email);
 
-		String actualCbSubjects = praticeFormsPage.testBase.getTextAfterSubmit2(praticeFormsPage.cbSubjectAfterSubmit);
-		assertEquals(praticeFormsPage.testBase.nomalizeString(actualCbSubjects),
-				praticeFormsPage.testBase.nomalizeString(subjects));
+		String actualGender = praticeFormsPage.getTableValue(praticeFormsPage.tableValueXpath, "Gender");
+		assertEquals(actualGender, studentRegister.gender);
 
-		String actualChkHobbies = praticeFormsPage.testBase.getTextAfterSubmit2(praticeFormsPage.chkHobbiesAfterSubmit);
-		assertEquals(actualChkHobbies, hobbies);
+		String actualMobilePhone = praticeFormsPage.getTableValue(praticeFormsPage.tableValueXpath, "Mobile");
+		assertEquals(actualMobilePhone, studentRegister.mobilePhone);
 
-		String actualGender = praticeFormsPage.testBase.getTextAfterSubmit2(praticeFormsPage.genderAfterSubmit);
-		assertEquals(actualGender, gender);
+		String combinedDateOfBirth = praticeFormsPage.getTableValue(praticeFormsPage.tableValueXpath, "Date of Birth");
+		String[] actualDateOfBirth = praticeFormsPage.splitValue(combinedDateOfBirth, "[, ]+");
+		assertEquals(Integer.parseInt(actualDateOfBirth[0]), Integer.parseInt(studentRegister.dayOfBirthday));
+		assertEquals(actualDateOfBirth[1], studentRegister.monthOfBirthday);
+		assertEquals(actualDateOfBirth[2], studentRegister.yearOfBirthday);
 
-		String actualMobilePhone = praticeFormsPage.testBase
-				.getTextAfterSubmit2(praticeFormsPage.mobilePhoneAfterSubmit);
-		assertEquals(actualMobilePhone, mobilePhone);
+		String actualCbSubjects = praticeFormsPage.getTableValue(praticeFormsPage.tableValueXpath, "Subjects");
+		assertEquals(praticeFormsPage.nomalizeString(actualCbSubjects),
+				praticeFormsPage.nomalizeString(studentRegister.subjects));
 
-		String combinedDateOfBirth = praticeFormsPage.testBase
-				.getTextAfterSubmit2(praticeFormsPage.dateOfBirhAfterSubmit);
-		String[] actualDateOfBirth = praticeFormsPage.testBase.splitValue(combinedDateOfBirth, "[, ]+"); // dấu + hiểu
-																											// là tìm
-																											// một hoặc
-																											// nhiều ký
-																											// tự phân
-																											// cách liên
-																											// tiếp (
-		assertEquals(Integer.parseInt(actualDateOfBirth[0]), Integer.parseInt(dayOfBirthday));
-		assertEquals(actualDateOfBirth[1], monthOfBirthday);
-		assertEquals(actualDateOfBirth[2], yearOfBirthday);
+		String actualChkHobbies = praticeFormsPage.getTableValue(praticeFormsPage.tableValueXpath, "Hobbies");
+		assertEquals(actualChkHobbies, studentRegister.hobbies);
 
-		String expectedNameImage = "anh1.png";
-		String actualImage = praticeFormsPage.testBase.getTextAfterSubmit2(praticeFormsPage.nameImageAterSubmit);
-		System.out.println(actualImage);
-		assertEquals(actualImage, expectedNameImage);
+		String[] splitImage = studentRegister.uploadPicture.split("\\\\");
+		String imageName = splitImage[splitImage.length - 1];
+		String actualUploadImage = praticeFormsPage.getTableValue(praticeFormsPage.tableValueXpath, "Picture");
+		assertEquals(actualUploadImage, imageName);
 
-		String actualCurrentAddress = praticeFormsPage.testBase
-				.getTextAfterSubmit2(praticeFormsPage.currentAdressAterSubmit);
-		assertEquals(actualCurrentAddress, currentAddress);
+		String actualCurrentAddress = praticeFormsPage.getTableValue(praticeFormsPage.tableValueXpath, "Address");
+		assertEquals(actualCurrentAddress, studentRegister.currentAddress);
 
-		// có thể làm tương tự như so sánh Name ở trên.
-		String combinedStateandCity = praticeFormsPage.testBase
-				.getTextAfterSubmit2(praticeFormsPage.chkStateAndCityAterSubmit);
-		String[] actualStateandCity = praticeFormsPage.testBase.splitValue(combinedStateandCity, " ");
-		assertEquals(actualStateandCity[0], state);
-		assertEquals(actualStateandCity[1], city);
+		String combinedStateandCity = praticeFormsPage.getTableValue(praticeFormsPage.tableValueXpath,
+				"State and City");
+		String[] actualStateandCity = praticeFormsPage.splitValue(combinedStateandCity, " ");
+		assertEquals(actualStateandCity[0], studentRegister.state);
+		assertEquals(actualStateandCity[1], studentRegister.city);
 
 	}
 }
