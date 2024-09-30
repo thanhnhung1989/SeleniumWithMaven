@@ -91,26 +91,22 @@ public class TestBase {
 
 	}
 
-//	public By getDayLocator(String day) {
-//		return By.xpath("//div[contains(@class,'react-datepicker__day') and contains(text(),'"+day+"')]");
-//	}
-
-	public void inputDate(By openDateDialogLocator, By monthLocator, By yearLocator, String day, String month,
-			String year) {
+	public void inputDate(By openDateDialogLocator, By monthLocator, By yearLocator, String dateOfBirth) {
+		String[] dates = dateOfBirth.split(" ");
 		WebElement eInputDate = driver.findElement(openDateDialogLocator);
 		eInputDate.click();
 		// Select year
 		WebElement drYear = driver.findElement(yearLocator);
 		Select drYearselect = new Select(drYear);
-		drYearselect.selectByVisibleText(year);
+		drYearselect.selectByVisibleText(dates[2]);
 		// Select month
 		WebElement drMonth = driver.findElement(monthLocator);
 		Select drMonthSelect = new Select(drMonth);
-		drMonthSelect.selectByVisibleText(month);
+		drMonthSelect.selectByVisibleText(dates[1]);
 		// Select day
 		WebElement drDay = driver.findElement(By.xpath(
 				"//div[contains(@class,'react-datepicker__day') and not(contains(@class,'outside-month')) and text()='"
-						+ day + "']"));
+						+ dates[0] + "']"));
 		drDay.click();
 	}
 
@@ -140,25 +136,6 @@ public class TestBase {
 		String newXpath = radioXpath.replace("{@param}", radioValue);
 		WebElement radioButton = driver.findElement(By.xpath(newXpath));
 		return radioButton.isSelected();
-	}
-
-	public String getTextAfterSubmit2(By locator) {
-		WebElement e = driver.findElement(locator);
-		return e.getText(); // Dùng getText() để lấy nội dung bên trong thẻ <td>
-	}
-
-	public String[] splitValue(String combinedValue, String delimiter) {
-		if (combinedValue == null || combinedValue.isEmpty()) {
-			return new String[0];// Trả về mảng rỗng nếu chuỗi đầu vào null hoặc rỗng
-		}
-		return combinedValue.split(delimiter);
-	}
-
-	public String nomalizeString(String input) {
-		if (input == null) {
-			return null;
-		}
-		return input.replaceAll("\\s+", "").toLowerCase();
 	}
 
 }
