@@ -68,7 +68,7 @@ public class PraticeFormsPage extends Page {
 		if (input == null) {
 			return "";
 		}
-		return input.replaceAll("\\s+", "").toLowerCase();
+		return input.replaceAll("\\s+", " ").toLowerCase();
 	}
 
 	public String[] splitValue(String combinedValue, String delimiter) {
