@@ -1,9 +1,7 @@
 package common;
 
-import static org.testng.Assert.assertEquals;
-
 import java.time.Duration;
-import java.util.NoSuchElementException;
+import java.util.Map;
 
 import org.openqa.selenium.By;
 import org.openqa.selenium.JavascriptExecutor;
@@ -11,7 +9,7 @@ import org.openqa.selenium.Keys;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.chrome.ChromeDriver;
-import org.openqa.selenium.interactions.Actions;
+import org.openqa.selenium.chrome.ChromeOptions;
 import org.openqa.selenium.support.Color;
 import org.openqa.selenium.support.ui.ExpectedConditions;
 import org.openqa.selenium.support.ui.Select;
@@ -23,11 +21,20 @@ public class TestBase {
 	public WebDriver driver;
 
 	public void openWeb() {
-		// String projectPath = System.getProperty("user.dir");
-		// System.setProperty("webdriver.chrome.driver", projectPath +
-		// "\\driver\\chromedriver.exe");
+		 // Thiết lập ChromeOptions
+        ChromeOptions options = new ChromeOptions();
+        String downloadPath = System.getProperty("user.dir") + "\\testdata\\";
+        options.setExperimentalOption("prefs", Map.of(
+                "download.default_directory", downloadPath,
+                "download.prompt_for_download", false,
+                "directory_upgrade", true
+        ));
+		
+//		 String projectPath = System.getProperty("user.dir");
+//		 System.setProperty("webdriver.chrome.driver", projectPath +
+//		 "\\driver\\chromedriver.exe");
 		WebDriverManager.chromedriver().setup();
-		driver = new ChromeDriver();
+		driver = new ChromeDriver(options);
 		driver.get("https://demoqa.com/");
 		driver.manage().window().maximize();
 	}
@@ -92,7 +99,7 @@ public class TestBase {
 	}
 
 	public void inputDate(By openDateDialogLocator, By monthLocator, By yearLocator, String dateOfBirth) {
-		String[] dates = dateOfBirth.split(" ");
+		String[] dates = dateOfBirth.split("/");
 		WebElement eInputDate = driver.findElement(openDateDialogLocator);
 		eInputDate.click();
 		// Select year

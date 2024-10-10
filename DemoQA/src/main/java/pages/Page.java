@@ -9,6 +9,9 @@ public class Page {
 	public TextBoxPage textBoxPage;
 	public CheckBoxPage checkBoxPage;
 	public PraticeFormsPage praticeForms;
+	public BrowserWindowsPage browserWindows;
+	public WebTablesPage webTables;
+	public UploadAndDownloadPage uploadAndDownload;
 	public TestBase testBase = new TestBase();
 
 	public Page(WebDriver driverWeb) {
@@ -36,5 +39,21 @@ public class Page {
 		return praticeForms;
 
 	}
-
+	public BrowserWindowsPage openBrowserWindowsPage() {
+		dr.navigate().to("https://demoqa.com/browser-windows");
+		browserWindows = new BrowserWindowsPage(dr);
+		return browserWindows;
+	}
+	public WebTablesPage openWebTablesPage() {
+		dr.navigate().to("https://demoqa.com/webtables");
+		webTables = new WebTablesPage(dr);
+		return webTables;
+	
+	}
+	public UploadAndDownloadPage openUploadAndDownloadPage() {
+		dr.navigate().to("https://demoqa.com/upload-download");
+		uploadAndDownload = new UploadAndDownloadPage(dr);
+		return uploadAndDownload;
+	
+	}
 }

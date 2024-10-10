@@ -17,13 +17,15 @@ public class PraticeFormsTest extends TestCase {
 		praticeFormsPage.openPraticeForms();
 		// khởi tạo đối tượng
 		StudentRegister studentRegister = new StudentRegister();
+		//Đọc dữ liệu từ file CSV và lưu trữ thông tin vào đối tượng StudentRegister.
+		//StudentRegister studentRegister = praticeFormsPage.fillFormFromCSV("testdata\\PraticeForm_InvalidData.csv");
 
 		studentRegister.firstName = "Nhung";
 		studentRegister.lastName = "Tran";
 		studentRegister.email = "abc@gmail.com";
 		studentRegister.gender = "Male";
 		studentRegister.mobilePhone = "0789878987";
-		studentRegister.dateOfBirth = "1 January 1989";
+		studentRegister.dateOfBirth = "1/January/1989";
 		studentRegister.subjects = "Maths, English";
 		studentRegister.hobbies = "Sports, Reading, Music";
 		studentRegister.uploadPicture = "testdata\\anh1.png";
@@ -50,10 +52,10 @@ public class PraticeFormsTest extends TestCase {
 		assertEquals(actualMobilePhone, studentRegister.mobilePhone);
 
 		String actualDateOfBirth = praticeFormsPage.getTableValue(praticeFormsPage.tableValueXpath,  "Date of Birth");
-		int index = studentRegister.dateOfBirth.lastIndexOf(" ");
-		//String expectedDateOfBirth = studentRegister.dateOfBirth.substring(0, index) + "," + studentRegister.dateOfBirth.substring(index + 1);
-
-		String expectedDateOfBirth = studentRegister.dateOfBirth.replace(Character.toString(studentRegister.dateOfBirth.charAt(index)), ",");
+//		int index = studentRegister.dateOfBirth.lastIndexOf(" ");
+////		String expectedDateOfBirth = studentRegister.dateOfBirth.substring(0, index) + "," + studentRegister.dateOfBirth.substring(index + 1);
+//
+		String expectedDateOfBirth = praticeFormsPage.convertDate(studentRegister.dateOfBirth);
 		assertEquals (actualDateOfBirth,expectedDateOfBirth );
 				
 		String actualCbSubjects = praticeFormsPage.getTableValue(praticeFormsPage.tableValueXpath, "Subjects");
@@ -62,14 +64,9 @@ public class PraticeFormsTest extends TestCase {
 
 		String actualChkHobbies = praticeFormsPage.getTableValue(praticeFormsPage.tableValueXpath, "Hobbies");
 		assertEquals(actualChkHobbies, studentRegister.hobbies);
-
-//		String[] splitImage = studentRegister.uploadPicture.split("\\\\");
-//		String imageName = splitImage[splitImage.length - 1];
-//		String actualUploadImage = praticeFormsPage.getTableValue(praticeFormsPage.tableValueXpath, "Picture");
-//		assertEquals(actualUploadImage, imageName);
 		
 		int indexImage = studentRegister.uploadPicture.lastIndexOf("\\");
-		String expectedFileName = studentRegister.uploadPicture.substring(index + 1);
+		String expectedFileName = studentRegister.uploadPicture.substring(indexImage + 1);
 		String actualUploadImage = praticeFormsPage.getTableValue(praticeFormsPage.tableValueXpath, "Picture");
 		assertEquals(actualUploadImage, expectedFileName);
 
@@ -83,15 +80,13 @@ public class PraticeFormsTest extends TestCase {
 		assertEquals(actualStateandCity[1], studentRegister.city);
 
 	}
-//	@Test(groups = "Validation Test")
-//	public void submitDataUnsuccessfully() {
-//		StudentRegister studentRegister = new StudentRegister();
-//		studentRegister.firstName = "";
-//		PraticeFormsPage praticeFormsPage = new PraticeFormsPage(testBase.driver);
-//		praticeFormsPage.openPraticeForms();
-//		praticeFormsPage.clickSubmit();
-//		assertTrue(praticeFormsPage.getCssBorderValue(praticeFormsPage.txtFirstName, "#dc3545"));
-//
-//	}
-}
+	@Test(groups = "Validation Test")
+	public void submitDataUnsuccessfully() throws InterruptedException {
+		PraticeFormsPage praticeFormsPage = new PraticeFormsPage(testBase.driver);
+		praticeFormsPage.openPraticeForms();
+		praticeFormsPage.clickSubmit();
+		Thread.sleep(2000);
+		assertTrue(praticeFormsPage.getCssBorderValue(praticeFormsPage.txtFirstName, "#dc3545"));
 
+	}
+}

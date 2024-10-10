@@ -21,6 +21,4 @@ public class TestCase {
 	public void tearDown() {
 		// testBase.quit();
 	}
-	
-	
 }
