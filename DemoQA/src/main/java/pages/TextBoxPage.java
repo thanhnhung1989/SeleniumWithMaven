@@ -23,4 +23,12 @@ public class TextBoxPage extends Page {
 		js.executeScript("arguments[0].scrollIntoView(true);", clickSubmit);
 		clickSubmit.click();
 	}
+	public String getTextAfterSubmit(By locator) {
+		WebElement e = dr.findElement(locator);
+		String fullText = e.getText();
+		int indexOfColon = fullText.indexOf(":");// tìm vị trí cua dau : tu chuoi
+		String expetedResult = fullText.substring(indexOfColon + 1);
+		return expetedResult;
+
+	}
 }

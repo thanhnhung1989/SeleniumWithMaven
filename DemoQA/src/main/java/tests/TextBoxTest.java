@@ -37,16 +37,16 @@ public class TextBoxTest extends TestCase {
 		textBoxPage.testBase.inputText(textBoxPage.txtPermanentAddress, expectPermanentAddress);
 		textBoxPage.clickSubmit();
 		
-		String actualName = textBoxPage.testBase.getTextAfterSubmit(textBoxPage.txtName);
+		String actualName = textBoxPage.getTextAfterSubmit(textBoxPage.txtName);
 		assertEquals(actualName, expectedName);
 		
-		String actualEmail = textBoxPage.testBase.getTextAfterSubmit(textBoxPage.txtEmail);
+		String actualEmail = textBoxPage.getTextAfterSubmit(textBoxPage.txtEmail);
 		assertEquals(actualEmail, expectedEmail);
 
-		String actualCurrentAddress = textBoxPage.testBase.getTextAfterSubmit(textBoxPage.txtcurrentAddress);
+		String actualCurrentAddress = textBoxPage.getTextAfterSubmit(textBoxPage.txtcurrentAddress);
 		assertEquals(actualCurrentAddress, expectCurrentAddress);
 		
-		String actualPermanentAddress = textBoxPage.testBase.getTextAfterSubmit(textBoxPage.txtPermanentAddress);
+		String actualPermanentAddress = textBoxPage.getTextAfterSubmit(textBoxPage.txtPermanentAddress);
 		assertEquals(actualPermanentAddress, expectPermanentAddress);
 		
 		String actualColor = textBoxPage.testBase.validateEmailFormat(textBoxPage.color);

@@ -3,6 +3,7 @@ package pages;
 import org.openqa.selenium.WebDriver;
 
 import common.TestBase;
+import pages.bookstore.LoginPage;
 
 public class Page {
 	public WebDriver dr;
@@ -12,6 +13,7 @@ public class Page {
 	public BrowserWindowsPage browserWindows;
 	public WebTablesPage webTables;
 	public UploadAndDownloadPage uploadAndDownload;
+	public LoginPage loginPage;
 	public TestBase testBase = new TestBase();
 
 	public Page(WebDriver driverWeb) {
@@ -54,6 +56,12 @@ public class Page {
 		dr.navigate().to("https://demoqa.com/upload-download");
 		uploadAndDownload = new UploadAndDownloadPage(dr);
 		return uploadAndDownload;
+	
+	}
+	public LoginPage openLogin() {
+		dr.navigate().to("https://demoqa.com/login");
+		loginPage = new LoginPage(dr);
+		return loginPage;
 	
 	}
 }

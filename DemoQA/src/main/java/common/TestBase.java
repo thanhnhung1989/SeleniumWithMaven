@@ -130,19 +130,27 @@ public class TestBase {
 		option.click();
 	}
 
-	public String getTextAfterSubmit(By locator) {
-		WebElement e = driver.findElement(locator);
-		String fullText = e.getText();
-		int indexOfColon = fullText.indexOf(":");// tìm vị trí cua dau : tu chuoi
-		String expetedResult = fullText.substring(indexOfColon + 1);
-		return expetedResult;
-
-	}
-
 	public boolean isRadioSelected(String radioXpath, String radioValue) {
 		String newXpath = radioXpath.replace("{@param}", radioValue);
 		WebElement radioButton = driver.findElement(By.xpath(newXpath));
 		return radioButton.isSelected();
+	}
+	//Scroll to element
+	public void scollToElement(By locator) {
+		JavascriptExecutor js = (JavascriptExecutor) driver;
+		WebElement element = driver.findElement(locator);
+		js.executeScript("arguments[0].scrollIntoView(true);", element);
+	}
+	//getText
+	public String getTextByLocator(By locator) {
+		String result = "";
+		result = driver.findElement(locator).getText();
+		return result;
+	}
+	
+	public void waitForElementToBeVisible(By locator) {
+		  WebDriverWait wait = new WebDriverWait(driver, Duration.ofSeconds(1000));
+		    wait.until(ExpectedConditions.visibilityOfElementLocated(locator));
 	}
 
 }
