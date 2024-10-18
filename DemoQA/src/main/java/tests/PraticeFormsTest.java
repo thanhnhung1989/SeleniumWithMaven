@@ -13,7 +13,7 @@ public class PraticeFormsTest extends TestCase {
 
 	@Test(groups = "happy case")
 	public void testClickSubmit() {
-		PraticeFormsPage praticeFormsPage = new PraticeFormsPage(testBase.driver);
+		PraticeFormsPage praticeFormsPage = new PraticeFormsPage(testBase.driver, CONFIG_FILE);
 		praticeFormsPage.openPraticeForms();
 		// khởi tạo đối tượng
 		StudentRegister studentRegister = new StudentRegister();
@@ -82,7 +82,7 @@ public class PraticeFormsTest extends TestCase {
 	}
 	@Test(groups = "Validation Test")
 	public void submitDataUnsuccessfully() throws InterruptedException {
-		PraticeFormsPage praticeFormsPage = new PraticeFormsPage(testBase.driver);
+		PraticeFormsPage praticeFormsPage = new PraticeFormsPage(testBase.driver, CONFIG_FILE);
 		praticeFormsPage.openPraticeForms();
 		praticeFormsPage.clickSubmit();
 		Thread.sleep(2000);

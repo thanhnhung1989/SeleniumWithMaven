@@ -13,8 +13,8 @@ public class TextBoxPage extends Page {
 	public By txtPermanentAddress = By.id("permanentAddress");
 	public By color = By.id("userEmail");
 
-	public TextBoxPage(WebDriver driverWeb) {
-		super(driverWeb);
+	public TextBoxPage(WebDriver driverWeb, String configFile) {
+		super(driverWeb, configFile);
 	}
 
 	public void clickSubmit() {

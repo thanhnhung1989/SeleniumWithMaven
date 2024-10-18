@@ -6,8 +6,8 @@ import org.openqa.selenium.WebElement;
 
 public class ProfilePage extends Page {
 
-	public ProfilePage(WebDriver driverWeb) {
-		super(driverWeb);
+	public ProfilePage(WebDriver driverWeb, String configFile) {
+		super(driverWeb, configFile);
 	}
 	
 	public By lblUserNameValue = By.id("userName-value");

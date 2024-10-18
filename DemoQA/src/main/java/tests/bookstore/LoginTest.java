@@ -19,13 +19,13 @@ public class LoginTest extends TestCase {
 	
 	@Test(dataProvider = "LoginData")
 	public void testlogin(String username, String password, String expectedErrorMessage) {
-		LoginPage loginPage = new LoginPage(testBase.driver);
+		LoginPage loginPage = new LoginPage(testBase.driver, CONFIG_FILE);
 		loginPage.openLogin();
 		
-		WebDriver drLogin = loginPage.dr;
+		WebDriver drLogin = loginPage.dr;// lấy webdriver từ loginPage
 		loginPage.clickLogin(username, password);
 		if (expectedErrorMessage.equalsIgnoreCase("")) {
-			ProfilePage profilePage = new ProfilePage(drLogin);
+			ProfilePage profilePage = new ProfilePage(drLogin, CONFIG_FILE);
 			testBase.waitForElementToBeVisible(profilePage.lblUserNameValue);
 			String actualUserNameValue = profilePage.testBase.getTextByLocator(profilePage.lblUserNameValue);
 			assertEquals(actualUserNameValue, username);

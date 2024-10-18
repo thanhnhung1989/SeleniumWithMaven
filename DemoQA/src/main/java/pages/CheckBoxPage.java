@@ -14,8 +14,8 @@ public class CheckBoxPage extends Page{
 	public By documentsCheckbox = By.xpath("//label[@for='tree-node-documents']/span[@class='rct-checkbox']/*[name()='svg']");
 	public By downloadsCheckbox = By.xpath("//label[@for='tree-node-downloads']/span[@class='rct-checkbox']/*[name()='svg']");
 
-	public CheckBoxPage(WebDriver driverWeb) {
-		super(driverWeb);
+	public CheckBoxPage(WebDriver driverWeb, String configFile) {
+		super(driverWeb, configFile);
 	}
 	
 	public void clickHomeCheckbox() {

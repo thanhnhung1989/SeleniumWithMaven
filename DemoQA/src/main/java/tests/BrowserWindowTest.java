@@ -9,7 +9,7 @@ import pages.BrowserWindowsPage;
 public class BrowserWindowTest extends TestCase {
 	@Test
 	public void testOpenTab() {
-		BrowserWindowsPage browserWindowsPage = new BrowserWindowsPage(testBase.driver);
+		BrowserWindowsPage browserWindowsPage = new BrowserWindowsPage(testBase.driver, CONFIG_FILE);
 		browserWindowsPage.openBrowserWindowsPage();
 		 browserWindowsPage.openNewTab();
 	
@@ -18,7 +18,7 @@ public class BrowserWindowTest extends TestCase {
 	
 	@Test
 	public void testOpenWindow() {
-		BrowserWindowsPage browserWindowsPage = new BrowserWindowsPage(testBase.driver);
+		BrowserWindowsPage browserWindowsPage = new BrowserWindowsPage(testBase.driver, CONFIG_FILE);
 		browserWindowsPage.openBrowserWindowsPage();
 		browserWindowsPage.openNewWindow();
 
@@ -27,7 +27,7 @@ public class BrowserWindowTest extends TestCase {
 	@Test
 	public void testOpenWindowMessage() {
 		String expectMes = "Knowledge increases by sharing but not by saving. Please share this website with your friends and in your organization.Knowledge increases by sharing but not by saving. Please share this website with your friends and in your organization.";
-		BrowserWindowsPage browserWindowsPage = new BrowserWindowsPage(testBase.driver);
+		BrowserWindowsPage browserWindowsPage = new BrowserWindowsPage(testBase.driver, CONFIG_FILE);
 		browserWindowsPage.openBrowserWindowsPage();
 		String actualMes = browserWindowsPage.openNewWindowMessage();
 		assertEquals(actualMes.trim(),expectMes.trim());

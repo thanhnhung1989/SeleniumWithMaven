@@ -10,8 +10,8 @@ public class WebTablesPage extends Page {
 	public By searchBoxLocator = By.id("searchBox");
 	public By searchBtnLocator = By.id("basic-addon2");
 
-	public WebTablesPage(WebDriver driverWeb) {
-		super(driverWeb);
+	public WebTablesPage(WebDriver driverWeb, String configFile) {
+		super(driverWeb, configFile);
 	}
 
 	public boolean searchAndValidateTable(String searchText) {

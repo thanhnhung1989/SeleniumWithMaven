@@ -22,11 +22,11 @@ public class TextBoxTest extends TestCase {
 //		HomePage homePage = new HomePage(testBase.driver);
 //		ElementsPage elementsPage = homePage.clickElements();
 //		TextBoxPage textBoxPage = elementsPage.clickTextBox();
-		TextBoxPage textBoxPage = new TextBoxPage(testBase.driver);
+		TextBoxPage textBoxPage = new TextBoxPage(testBase.driver, CONFIG_FILE);
 		textBoxPage.openTextBoxPage();
 
 		String expectedName = "Tran Thanh Nhung";
-		String expectedEmail = "abcgmail.com";
+		String expectedEmail = "abc@gmail.com";
 		String expectCurrentAddress = "My dinh 2";
 		String expectPermanentAddress = "Nam Tu Liem, Ha Noi";
 		String expectColor = "#ced4da";

@@ -12,7 +12,7 @@ public class WebTablesTest extends TestCase {
 
 	@Test
 	public void searchTextIsFound() {
-		WebTablesPage webTable = new WebTablesPage(testBase.driver);
+		WebTablesPage webTable = new WebTablesPage(testBase.driver, CONFIG_FILE);
 		webTable.openWebTablesPage();
 		boolean isFound = webTable.searchAndValidateTable("en");
 		assertTrue(isFound, "Kết quả không khớp");
@@ -21,7 +21,7 @@ public class WebTablesTest extends TestCase {
 
 	@Test
 	public void searchTextNotFound() {
-		WebTablesPage webTable = new WebTablesPage(testBase.driver);
+		WebTablesPage webTable = new WebTablesPage(testBase.driver, CONFIG_FILE);
 		webTable.openWebTablesPage();
 		boolean isFound = webTable.searchAndValidateTable("lpp");
 		assertFalse(isFound, "\"Kết quả tìm kiếm không chính xác. Từ khóa không tồn tại nhưng lại được tìm thấy \"");

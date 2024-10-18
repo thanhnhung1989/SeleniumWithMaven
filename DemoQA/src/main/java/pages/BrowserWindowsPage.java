@@ -18,8 +18,8 @@ public class BrowserWindowsPage extends Page {
 	public By btnNewWindowMessage = By.id("messageWindowButton");
 	public By messageLocator = By.tagName("body");
 
-	public BrowserWindowsPage(WebDriver driverWeb) {
-		super(driverWeb);
+	public BrowserWindowsPage(WebDriver driverWeb, String configFile) {
+		super(driverWeb, configFile);
 	}
 
 	public void openNewTab() {

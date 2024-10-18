@@ -9,8 +9,8 @@ public class UploadAndDownloadPage extends Page {
 	
 	public By btnDownload = By.id("downloadButton");
 
-	public UploadAndDownloadPage(WebDriver driverWeb) {
-		super(driverWeb);
+	public UploadAndDownloadPage(WebDriver driverWeb, String configFile) {
+		super(driverWeb, configFile);
 	}
 	public void clickDownload() {
 		

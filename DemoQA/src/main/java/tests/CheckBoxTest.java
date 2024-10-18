@@ -13,7 +13,7 @@ public class CheckBoxTest extends TestCase {
 
 	@Test
 	public void verifyCheckBox() {
-		CheckBoxPage checkBoxPage = new CheckBoxPage(testBase.driver);
+		CheckBoxPage checkBoxPage = new CheckBoxPage(testBase.driver, CONFIG_FILE);
 		checkBoxPage.openCheckBoxPage();
 		String actualClass = testBase.driver.findElement(checkBoxPage.chkHome).getAttribute("class");
 		assertTrue(actualClass.contains("uncheck"));// giá trị của thuộc tính class của phần tử có chứa chuỗi "uncheck"

@@ -38,8 +38,8 @@ public class PraticeFormsPage extends Page {
 
 	public String tableValueXpath = "//td[text()='{@param}']/following::td[1]";
 
-	public PraticeFormsPage(WebDriver driverWeb) {
-		super(driverWeb);
+	public PraticeFormsPage(WebDriver driverWeb, String configFile) {
+		super(driverWeb, configFile);
 	}
 
 	public void clickSubmit() {

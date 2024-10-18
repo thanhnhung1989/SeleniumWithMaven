@@ -9,8 +9,8 @@ import org.openqa.selenium.WebElement;
 
 public class HomePage extends Page {
 
-	public HomePage(WebDriver driverWeb) {
-		super(driverWeb);
+	public HomePage(WebDriver driverWeb, String configFile) {
+		super(driverWeb, configFile);
 
 	}
 
@@ -23,7 +23,7 @@ public class HomePage extends Page {
 
 		elementsLink.click();
 
-		return new ElementsPage(dr);//// truyền đi dr, giữ dr ko null
+		return new ElementsPage(dr, configFile);//// truyền đi dr, giữ dr ko null
 
 	}
 
