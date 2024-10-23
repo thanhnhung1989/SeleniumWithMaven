@@ -97,7 +97,7 @@ public class PraticeFormsTest extends TestCase {
 
 			String actualDateOfBirth = praticeFormsPage.getTableValue(praticeFormsPage.tableValueXpath,
 					"Date of Birth");
-			String expectedDateOfBirth = praticeFormsPage.convertDate(studentRegister.dateOfBirth).replace(", ", ",");
+			String expectedDateOfBirth = praticeFormsPage.convertDate(studentRegister.dateOfBirth);
 			assertEquals(actualDateOfBirth, expectedDateOfBirth);
 
 			String actualCbSubjects = praticeFormsPage.getTableValue(praticeFormsPage.tableValueXpath, "Subjects");

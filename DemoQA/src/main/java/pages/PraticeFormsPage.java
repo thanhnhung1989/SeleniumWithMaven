@@ -211,7 +211,7 @@ public class PraticeFormsPage extends Page {
 	    String newDay = (dayInt < 10) ? "0" + dayInt : day;
 
 	    // Trả về ngày ở định dạng "dd MMMM, yyyy"
-	    return newDay + " " + monthName + ", " + year;
+	    return newDay + " " + monthName + "," + year;
 	}
 	
 	public void inputDate(By openDateDialogLocator, By monthLocator, By yearLocator, String dateOfBirth) {

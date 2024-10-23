@@ -2,7 +2,7 @@
 <testng-results ignored="0" total="2" passed="2" failed="0" skipped="0">
   <reporter-output>
   </reporter-output>
-  <suite started-at="2024-10-23T16:36:34 ICT" name="DemoQA" finished-at="2024-10-23T16:37:33 ICT" duration-ms="59417">
+  <suite started-at="2024-10-23T17:00:29 ICT" name="DemoQA" finished-at="2024-10-23T17:01:22 ICT" duration-ms="53042">
     <groups>
       <group name="Validation Test">
         <method signature="PraticeFormsTest.submitDataUnsuccessfully()[pri:0, instance:tests.PraticeFormsTest@131774fe]" name="submitDataUnsuccessfully" class="tests.PraticeFormsTest"/>
@@ -11,9 +11,9 @@
         <method signature="PraticeFormsTest.testClickSubmit()[pri:0, instance:tests.PraticeFormsTest@131774fe]" name="testClickSubmit" class="tests.PraticeFormsTest"/>
       </group> <!-- happy case -->
     </groups>
-    <test started-at="2024-10-23T16:36:34 ICT" name="PraticeFormsTest" finished-at="2024-10-23T16:37:33 ICT" duration-ms="59417">
+    <test started-at="2024-10-23T17:00:29 ICT" name="PraticeFormsTest" finished-at="2024-10-23T17:01:22 ICT" duration-ms="53042">
       <class name="tests.PraticeFormsTest">
-        <test-method is-config="true" signature="setUp(java.lang.String)[pri:0, instance:tests.PraticeFormsTest@131774fe]" started-at="2024-10-23T16:36:34 ICT" name="setUp" finished-at="2024-10-23T16:36:51 ICT" duration-ms="16749" status="PASS">
+        <test-method is-config="true" signature="setUp(java.lang.String)[pri:0, instance:tests.PraticeFormsTest@131774fe]" started-at="2024-10-23T17:00:29 ICT" name="setUp" finished-at="2024-10-23T17:00:45 ICT" duration-ms="15190" status="PASS">
           <params>
             <param index="0">
               <value>
@@ -24,11 +24,11 @@
           <reporter-output>
           </reporter-output>
         </test-method> <!-- setUp -->
-        <test-method signature="submitDataUnsuccessfully()[pri:0, instance:tests.PraticeFormsTest@131774fe]" started-at="2024-10-23T16:36:51 ICT" name="submitDataUnsuccessfully" finished-at="2024-10-23T16:36:58 ICT" duration-ms="7085" status="PASS">
+        <test-method signature="submitDataUnsuccessfully()[pri:0, instance:tests.PraticeFormsTest@131774fe]" started-at="2024-10-23T17:00:45 ICT" name="submitDataUnsuccessfully" finished-at="2024-10-23T17:00:50 ICT" duration-ms="5879" status="PASS">
           <reporter-output>
           </reporter-output>
         </test-method> <!-- submitDataUnsuccessfully -->
-        <test-method signature="testClickSubmit()[pri:0, instance:tests.PraticeFormsTest@131774fe]" started-at="2024-10-23T16:36:58 ICT" name="testClickSubmit" finished-at="2024-10-23T16:37:33 ICT" duration-ms="35536" status="PASS">
+        <test-method signature="testClickSubmit()[pri:0, instance:tests.PraticeFormsTest@131774fe]" started-at="2024-10-23T17:00:50 ICT" name="testClickSubmit" finished-at="2024-10-23T17:01:22 ICT" duration-ms="31932" status="PASS">
           <reporter-output>
           </reporter-output>
         </test-method> <!-- testClickSubmit -->
