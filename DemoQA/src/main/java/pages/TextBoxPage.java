@@ -12,6 +12,11 @@ public class TextBoxPage extends Page {
 	public By txtcurrentAddress = By.id("currentAddress");
 	public By txtPermanentAddress = By.id("permanentAddress");
 	public By color = By.id("userEmail");
+	
+	public By outputName = By.id("name");
+	public By outputEmail = By.id("email");
+	public By outputCurrAdd = By.xpath("//p[@id='currentAddress']");
+	public By outputPerAdd = By.xpath("//p[@id='permanentAddress']");
 
 	public TextBoxPage(WebDriver driverWeb, String configFile) {
 		super(driverWeb, configFile);

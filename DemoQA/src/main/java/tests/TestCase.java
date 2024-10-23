@@ -2,6 +2,7 @@ package tests;
 
 import org.testng.annotations.AfterClass;
 import org.testng.annotations.BeforeClass;
+import org.testng.annotations.Parameters;
 
 import common.Configurations;
 import common.TestBase;
@@ -15,9 +16,10 @@ public class TestCase {
 	public Configurations configurations = new Configurations(CONFIG_FILE);
 	public TestBase testBase = new TestBase(CONFIG_FILE);
 
+	@Parameters("browser")
 	@BeforeClass
-	public void setUp() {
-		testBase.openSingleBroswer(configurations.getConfigValueByKey("url"), "chrome");
+	public void setUp(String brower) {
+		testBase.openSingleBroswer(configurations.getConfigValueByKey("url"), brower);
 	}
 
 	// @AfterClass

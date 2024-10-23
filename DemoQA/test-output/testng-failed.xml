@@ -1,14 +1,15 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <!DOCTYPE suite SYSTEM "https://testng.org/testng-1.0.dtd">
-<suite name="Failed suite [Default suite]" guice-stage="DEVELOPMENT">
-  <test thread-count="5" name="Default test(failed)">
+<suite name="Failed suite [DemoQA]" guice-stage="DEVELOPMENT">
+  <parameter name="browser" value="chrome"/>
+  <test thread-count="5" name="PraticeFormsTest(failed)">
     <classes>
-      <class name="tests.BookStoreTest">
+      <class name="tests.PraticeFormsTest">
         <methods>
-          <include name="sortNameVerify"/>
           <include name="setUp"/>
+          <include name="testClickSubmit"/>
         </methods>
-      </class> <!-- tests.BookStoreTest -->
+      </class> <!-- tests.PraticeFormsTest -->
     </classes>
-  </test> <!-- Default test(failed) -->
-</suite> <!-- Failed suite [Default suite] -->
+  </test> <!-- PraticeFormsTest(failed) -->
+</suite> <!-- Failed suite [DemoQA] -->

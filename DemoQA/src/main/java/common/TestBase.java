@@ -1,6 +1,13 @@
 package common;
 
+import java.io.BufferedReader;
+import java.io.FileReader;
+import java.io.IOException;
 import java.time.Duration;
+import java.util.ArrayList;
+import java.util.Arrays;
+import java.util.HashMap;
+import java.util.List;
 import java.util.Map;
 
 import org.openqa.selenium.By;
@@ -20,8 +27,6 @@ import org.openqa.selenium.support.Color;
 import org.openqa.selenium.support.ui.ExpectedConditions;
 import org.openqa.selenium.support.ui.Select;
 import org.openqa.selenium.support.ui.WebDriverWait;
-
-import io.github.bonigarcia.wdm.WebDriverManager;
 
 public class TestBase {
 	public WebDriver driver;
@@ -63,6 +68,10 @@ public class TestBase {
 	}
 
 	public void inputText(By txtInput, String value) {
+		 if (value == null || value.trim().isEmpty()) {
+		        System.out.println("Cannot input empty value for: " + txtInput);
+		        return; // Bỏ qua nếu giá trị rỗng
+		    }
 		WebElement inputName = driver.findElement(txtInput);
 		inputName.sendKeys(value);
 	}
@@ -81,20 +90,36 @@ public class TestBase {
 		}
 	}
 
+//	public void inputValuesToCombobox(By comboLocator, String comboValue) {
+//		if (!comboValue.isEmpty() || !comboValue.isBlank()) {
+//			// Tách các giá trị trong comboValue thành mảng các chuỗi, dựa trên dấu phẩy
+//			String[] subjects = comboValue.split(",");
+//			WebElement subjectField = driver.findElement(comboLocator);
+//			subjectField.click();
+//			for (String input : subjects) {
+//				// Xóa khoảng trắng hai đầu của mỗi subject và nhập nó vào combobox
+//				subjectField.sendKeys(input.trim());
+//				subjectField.sendKeys(Keys.ENTER);
+//			}
+//		}
+//
+//	}
 	public void inputValuesToCombobox(By comboLocator, String comboValue) {
-		if (!comboValue.isEmpty() || !comboValue.isBlank()) {
-			// Tách các giá trị trong comboValue thành mảng các chuỗi, dựa trên dấu phẩy
-			String[] subjects = comboValue.split(",");
-			WebElement subjectField = driver.findElement(comboLocator);
-			subjectField.click();
-			for (String input : subjects) {
-				// Xóa khoảng trắng hai đầu của mỗi subject và nhập nó vào combobox
-				subjectField.sendKeys(input.trim());
-				subjectField.sendKeys(Keys.ENTER);
-			}
-		}
-
+	if (comboValue != null && !comboValue.isEmpty() && !comboValue.isBlank()) {
+	    String[] subjects = comboValue.split(",");
+	    if (subjects.length > 0) {
+	        WebElement subjectField = driver.findElement(comboLocator);
+	        subjectField.click();
+	        for (String input : subjects) {
+	            if (!input.trim().isEmpty()) {
+	                subjectField.sendKeys(input.trim());
+	                subjectField.sendKeys(Keys.ENTER);
+	            }
+	        }
+	    }
 	}
+	}
+
 
 	public void selectCheckbox(String chkXpath, String chkValue) {
 		if (!chkValue.isEmpty() || !chkValue.isBlank()) {
@@ -121,25 +146,70 @@ public class TestBase {
 
 	}
 
+//	public void inputDate(By openDateDialogLocator, By monthLocator, By yearLocator, String dateOfBirth) {
+//		String[] dates = dateOfBirth.split("/");
+//		WebElement eInputDate = driver.findElement(openDateDialogLocator);
+//		eInputDate.click();
+//		// Select year
+//		WebElement drYear = driver.findElement(yearLocator);
+//		Select drYearselect = new Select(drYear);
+//		drYearselect.selectByVisibleText(dates[2]);
+//		// Select month
+//		WebElement drMonth = driver.findElement(monthLocator);
+//		Select drMonthSelect = new Select(drMonth);
+//		drMonthSelect.selectByVisibleText(dates[1]);
+//		// Select day
+//		
+//		WebElement drDay = driver.findElement(By.xpath(
+//				"//div[contains(@class,'react-datepicker__day') and not(contains(@class,'outside-month')) and text()='"
+//						+ dates[0] + "']"));
+//		drDay.click();
+//	}
 	public void inputDate(By openDateDialogLocator, By monthLocator, By yearLocator, String dateOfBirth) {
-		String[] dates = dateOfBirth.split("/");
-		WebElement eInputDate = driver.findElement(openDateDialogLocator);
-		eInputDate.click();
-		// Select year
-		WebElement drYear = driver.findElement(yearLocator);
-		Select drYearselect = new Select(drYear);
-		drYearselect.selectByVisibleText(dates[2]);
-		// Select month
-		WebElement drMonth = driver.findElement(monthLocator);
-		Select drMonthSelect = new Select(drMonth);
-		drMonthSelect.selectByVisibleText(dates[1]);
-		// Select day
+	    String[] dates = dateOfBirth.split("/");
+	    WebElement eInputDate = driver.findElement(openDateDialogLocator);
+	    eInputDate.click();
+
+	    // Select year
+	    WebElement drYear = driver.findElement(yearLocator);
+	    Select drYearselect = new Select(drYear);
+	    drYearselect.selectByVisibleText(dates[2]); // Năm
+
+	    // Select month
+	    WebElement drMonth = driver.findElement(monthLocator);
+	    Select drMonthSelect = new Select(drMonth);
+	    String month = getMonthName(dates[1]); // Chuyển đổi số tháng sang tên tháng
+	    drMonthSelect.selectByVisibleText(month); // Chọn tháng
+
+	    // Select day
+
 		WebElement drDay = driver.findElement(By.xpath(
-				"//div[contains(@class,'react-datepicker__day') and not(contains(@class,'outside-month')) and text()='"
-						+ dates[0] + "']"));
-		drDay.click();
+		"//div[contains(@class,'react-datepicker__day') and not(contains(@class,'outside-month')) and text()='"
+				+ dates[0] + "']"));
+		 drDay.click();
 	}
 
+	// Phương thức chuyển đổi số tháng thành tên tháng
+	private String getMonthName(String month) {
+	    switch (month) {
+	        case "1": return "January";
+	        case "2": return "February";
+	        case "3": return "March";
+	        case "4": return "April";
+	        case "5": return "May";
+	        case "6": return "June";
+	        case "7": return "July";
+	        case "8": return "August";
+	        case "9": return "September";
+	        case "10": return "October";
+	        case "11": return "November";
+	        case "12": return "December";
+	        default: return "";
+	    }
+	}
+
+	
+	
 	public void selectFromDropDown(By dropdownLocator, String optionText) {
 		// Tìm và click vào dropdown để mở
 		WebElement dropdownElement = driver.findElement(dropdownLocator);
@@ -177,5 +247,52 @@ public class TestBase {
 		WebDriverWait wait = new WebDriverWait(driver, Duration.ofSeconds(timeout));
 		wait.until(ExpectedConditions.visibilityOfElementLocated(locator));
 	}
+	
+	public static List<HashMap<String, String>> getTestDataFromCSV(String csvFilePath) {
+	    List<HashMap<String, String>> listData = new ArrayList<>();
+	    String line;
+	    String[] columnNames = null;  // Lưu tên các cột
+
+	    try (BufferedReader br = new BufferedReader(new FileReader(csvFilePath))) {
+	        // Đọc dòng đầu tiên để lấy tên các cột
+	        if ((line = br.readLine()) != null) {
+	            columnNames = line.split(",(?=(?:[^\"]*\"[^\"]*\")*[^\"]*$)");  // Lấy tên cột từ dòng đầu tiên
+	        }
+
+	        // Đọc các dòng tiếp theo và ánh xạ giá trị vào HashMap dựa trên tên cột
+	        while ((line = br.readLine()) != null) {
+	            // Bỏ qua dòng trống
+	            if (line.trim().isEmpty()) {
+	                continue;
+	            }
+
+	            String[] values = line.split(",(?=(?:[^\"]*\"[^\"]*\")*[^\"]*$)");  // Lấy giá trị từng cột của dòng hiện tại
+
+	            HashMap<String, String> valSet = new HashMap<>();
+
+	            // Kiểm tra nếu số lượng giá trị khớp với số lượng tên cột
+	            if (columnNames != null && values.length == columnNames.length) {
+	                for (int i = 0; i < values.length; i++) {
+	                    String value = values[i].replace("\"", "").trim();
+	                    valSet.put(columnNames[i], value.isEmpty() ? null : value); // Gán null nếu giá trị là rỗng
+	                }
+	                listData.add(valSet);  // Thêm HashMap vào danh sách
+
+	                // Chỉ in ra dữ liệu sau khi đã thêm thành công
+	                System.out.println("Processing row data: " + valSet);
+	            } else {
+	                System.err.println("Row length does not match column names length.");
+	            }
+	        }
+	    } catch (IOException e) {
+	        e.printStackTrace();
+	    }
+
+	    return listData;  // Trả về danh sách dữ liệu
+	}
+
+
 
 }
+
+
