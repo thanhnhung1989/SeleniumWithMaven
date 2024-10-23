@@ -55,7 +55,7 @@ public class PraticeFormsPage extends Page {
 		testBase.inputText(txtEmail, studentRegister.email);
 		testBase.selectRadioButton(genderXpath, studentRegister.gender);
 		testBase.inputText(txtMobilePhone, studentRegister.mobilePhone);
-		testBase.inputDate(DateDialogLocator, monthLocator, yearLocator, studentRegister.dateOfBirth);
+		inputDate(DateDialogLocator, monthLocator, yearLocator, studentRegister.dateOfBirth);
 		testBase.inputValuesToCombobox(cbSubjects, studentRegister.subjects);
 		testBase.selectCheckbox(chkXpathHobbies, studentRegister.hobbies);
 		testBase.uploadPicture(studentRegister.uploadPicture);
@@ -63,16 +63,6 @@ public class PraticeFormsPage extends Page {
 		testBase.selectFromDropDown(chkXpathState, studentRegister.state);
 		testBase.selectFromDropDown(chkXpathCity, studentRegister.city);
 	}
-	
-
-//	// Phương thức kiểm tra định dạng ngày tháng
-//	private boolean isValidDate(String date) {
-//	    // Kiểm tra xem ngày có định dạng hợp lệ không (ví dụ: "1-Jan-89" hoặc "2-Jan-1989")
-//	    // Đây là một ví dụ đơn giản, bạn có thể mở rộng thêm tùy theo nhu cầu
-//	    return date.matches("\\d{1,2}-[a-zA-Z]{3}-\\d{2,4}");
-//	}
-
-
 
 	public String getTableValue(String xpath, String fieldName) {
 		String newXpath = xpath.replace("{@param}", fieldName);
@@ -223,4 +213,48 @@ public class PraticeFormsPage extends Page {
 	    // Trả về ngày ở định dạng "dd MMMM, yyyy"
 	    return newDay + " " + monthName + ", " + year;
 	}
+	
+	public void inputDate(By openDateDialogLocator, By monthLocator, By yearLocator, String dateOfBirth) {
+	    String[] dates = dateOfBirth.split("/");
+	    WebElement eInputDate = dr.findElement(openDateDialogLocator);
+	    eInputDate.click();
+
+	    // Select year
+	    WebElement drYear = dr.findElement(yearLocator);
+	    Select drYearselect = new Select(drYear);
+	    drYearselect.selectByVisibleText(dates[2]); // Năm
+
+	    // Select month
+	    WebElement drMonth = dr.findElement(monthLocator);
+	    Select drMonthSelect = new Select(drMonth);
+	    String month = getMonthName(dates[1]); // Chuyển đổi số tháng sang tên tháng
+	    drMonthSelect.selectByVisibleText(month); // Chọn tháng
+
+	    // Select day
+
+		WebElement drDay = dr.findElement(By.xpath(
+		"//div[contains(@class,'react-datepicker__day') and not(contains(@class,'outside-month')) and text()='"
+				+ dates[0] + "']"));
+		 drDay.click();
+	}
+
+	// Phương thức chuyển đổi số tháng thành tên tháng
+	private String getMonthName(String month) {
+	    switch (month) {
+	        case "1": return "January";
+	        case "2": return "February";
+	        case "3": return "March";
+	        case "4": return "April";
+	        case "5": return "May";
+	        case "6": return "June";
+	        case "7": return "July";
+	        case "8": return "August";
+	        case "9": return "September";
+	        case "10": return "October";
+	        case "11": return "November";
+	        case "12": return "December";
+	        default: return "";
+	    }
+	}
+
 }

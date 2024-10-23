@@ -22,7 +22,7 @@ import tests.models.StudentRegister;
 public class PraticeFormsTest extends TestCase {
 
 	@Test(groups = "happy case")
-	public void testClickSubmit() {
+	public void testClickSubmit() throws InterruptedException {
 		PraticeFormsPage praticeFormsPage = new PraticeFormsPage(testBase.driver, CONFIG_FILE);
 		praticeFormsPage.openPraticeForms();
 
@@ -120,7 +120,8 @@ public class PraticeFormsTest extends TestCase {
 			String[] actualStateandCity = praticeFormsPage.splitValue(combinedStateandCity, " ");
 			assertEquals(actualStateandCity[0], studentRegister.state);
 			assertEquals(actualStateandCity[1], studentRegister.city);
-
+			
+			 Thread.sleep(10000);
 			praticeFormsPage.openPraticeForms();
 
 		}
