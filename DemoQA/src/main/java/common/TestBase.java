@@ -196,7 +196,8 @@ public class TestBase {
 				if (columnNames != null && values.length == columnNames.length) {
 					for (int i = 0; i < values.length; i++) {
 						String value = values[i].replace("\"", "").trim();
-						valSet.put(columnNames[i], value.isEmpty() ? null : value); // Gán null nếu giá trị là rỗng
+						//valSet.put(columnNames[i], value.isEmpty() ? null : value); // Gán null nếu giá trị là rỗng
+						valSet.put(columnNames[i], value.isEmpty() ? "" : value); 
 					}
 					listData.add(valSet); // Thêm HashMap vào danh sách
 

@@ -3,7 +3,9 @@ package pages;
 import java.io.FileReader;
 import java.io.IOException;
 import java.io.Reader;
+import java.text.SimpleDateFormat;
 import java.time.Duration;
+import java.util.Date;
 
 import org.apache.commons.csv.CSVFormat;
 import org.apache.commons.csv.CSVParser;
@@ -52,7 +54,10 @@ public class PraticeFormsPage extends Page {
 	public void inputData(StudentRegister studentRegister) {
 		testBase.inputText(txtFirstName, studentRegister.firstName);
 		testBase.inputText(txtLastName, studentRegister.lastName);
-		testBase.inputText(txtEmail, studentRegister.email);
+		   if (studentRegister.email != null && !studentRegister.email.isEmpty()) {
+		        testBase.inputText(txtEmail, studentRegister.email);
+		    }
+		//testBase.inputText(txtEmail, studentRegister.email);
 		testBase.selectRadioButton(genderXpath, studentRegister.gender);
 		testBase.inputText(txtMobilePhone, studentRegister.mobilePhone);
 		inputDate(DateDialogLocator, monthLocator, yearLocator, studentRegister.dateOfBirth);
@@ -148,112 +153,141 @@ public class PraticeFormsPage extends Page {
 //		}
 //		return newDate;
 //	}
-	
+
 	public String convertDate(String date) {
-	    // Tách các thành phần ngày, tháng, năm
-	    String[] dates = date.split("/");
-	    String day = dates[0];
-	    String month = dates[1];
-	    String year = dates[2];
+		// Tách các thành phần ngày, tháng, năm
+		   if (date == null || date.isEmpty()) {
+		        SimpleDateFormat formatter = new SimpleDateFormat("dd/MM/yyyy");
+		        date = formatter.format(new Date());
+		    }
+		String[] dates = date.split("/");
+		String day = dates[0];
+		String month = dates[1];
+		String year = dates[2];
+		
+		String monthName = getMonthName(month);
+//		// Chuyển đổi tháng từ dạng số sang dạng tên tháng đầy đủ
+//		String monthName = "";
+//		switch (month) {
+//		case "1":
+//		case "01":
+//			monthName = "January";
+//			break;
+//		case "2":
+//		case "02":
+//			monthName = "February";
+//			break;
+//		case "3":
+//		case "03":
+//			monthName = "March";
+//			break;
+//		case "4":
+//		case "04":
+//			monthName = "April";
+//			break;
+//		case "5":
+//		case "05":
+//			monthName = "May";
+//			break;
+//		case "6":
+//		case "06":
+//			monthName = "June";
+//			break;
+//		case "7":
+//		case "07":
+//			monthName = "July";
+//			break;
+//		case "8":
+//		case "08":
+//			monthName = "August";
+//			break;
+//		case "9":
+//		case "09":
+//			monthName = "September";
+//			break;
+//		case "10":
+//			monthName = "October";
+//			break;
+//		case "11":
+//			monthName = "November";
+//			break;
+//		case "12":
+//			monthName = "December";
+//			break;
+//		}
 
-	    // Chuyển đổi tháng từ dạng số sang dạng tên tháng đầy đủ
-	    String monthName = "";
-	    switch (month) {
-	        case "1":
-	        case "01":
-	            monthName = "January";
-	            break;
-	        case "2":
-	        case "02":
-	            monthName = "February";
-	            break;
-	        case "3":
-	        case "03":
-	            monthName = "March";
-	            break;
-	        case "4":
-	        case "04":
-	            monthName = "April";
-	            break;
-	        case "5":
-	        case "05":
-	            monthName = "May";
-	            break;
-	        case "6":
-	        case "06":
-	            monthName = "June";
-	            break;
-	        case "7":
-	        case "07":
-	            monthName = "July";
-	            break;
-	        case "8":
-	        case "08":
-	            monthName = "August";
-	            break;
-	        case "9":
-	        case "09":
-	            monthName = "September";
-	            break;
-	        case "10":
-	            monthName = "October";
-	            break;
-	        case "11":
-	            monthName = "November";
-	            break;
-	        case "12":
-	            monthName = "December";
-	            break;
-	    }
+		// Thêm số 0 vào ngày nếu cần thiết
+		int dayInt = Integer.valueOf(day);
+		String newDay = (dayInt < 10) ? "0" + dayInt : day;
 
-	    // Thêm số 0 vào ngày nếu cần thiết
-	    int dayInt = Integer.valueOf(day);
-	    String newDay = (dayInt < 10) ? "0" + dayInt : day;
-
-	    // Trả về ngày ở định dạng "dd MMMM, yyyy"
-	    return newDay + " " + monthName + "," + year;
+		// Trả về ngày ở định dạng "dd MMMM, yyyy"
+		return newDay + " " + monthName + "," + year;
 	}
-	
+
 	public void inputDate(By openDateDialogLocator, By monthLocator, By yearLocator, String dateOfBirth) {
-	    String[] dates = dateOfBirth.split("/");
-	    WebElement eInputDate = dr.findElement(openDateDialogLocator);
-	    eInputDate.click();
+		if (dateOfBirth != null && !dateOfBirth.isEmpty()) {
+			String[] dates = dateOfBirth.split("/");
+			WebElement eInputDate = dr.findElement(openDateDialogLocator);
+			eInputDate.click();
 
-	    // Select year
-	    WebElement drYear = dr.findElement(yearLocator);
-	    Select drYearselect = new Select(drYear);
-	    drYearselect.selectByVisibleText(dates[2]); // Năm
+			// Select year
+			WebElement drYear = dr.findElement(yearLocator);
+			Select drYearselect = new Select(drYear);
+			drYearselect.selectByVisibleText(dates[2]); // Năm
 
-	    // Select month
-	    WebElement drMonth = dr.findElement(monthLocator);
-	    Select drMonthSelect = new Select(drMonth);
-	    String month = getMonthName(dates[1]); // Chuyển đổi số tháng sang tên tháng
-	    drMonthSelect.selectByVisibleText(month); // Chọn tháng
+			// Select month
+			WebElement drMonth = dr.findElement(monthLocator);
+			Select drMonthSelect = new Select(drMonth);
+			String month = getMonthName(dates[1]); // Chuyển đổi số tháng sang tên tháng
+			drMonthSelect.selectByVisibleText(month); // Chọn tháng
 
-	    // Select day
+			// Select day
 
-		WebElement drDay = dr.findElement(By.xpath(
-		"//div[contains(@class,'react-datepicker__day') and not(contains(@class,'outside-month')) and text()='"
-				+ dates[0] + "']"));
-		 drDay.click();
+			WebElement drDay = dr.findElement(By.xpath(
+					"//div[contains(@class,'react-datepicker__day') and not(contains(@class,'outside-month')) and text()='"
+							+ dates[0] + "']"));
+			drDay.click();
+		} else {	}
 	}
 
 	// Phương thức chuyển đổi số tháng thành tên tháng
 	private String getMonthName(String month) {
 	    switch (month) {
-	        case "1": return "January";
-	        case "2": return "February";
-	        case "3": return "March";
-	        case "4": return "April";
-	        case "5": return "May";
-	        case "6": return "June";
-	        case "7": return "July";
-	        case "8": return "August";
-	        case "9": return "September";
-	        case "10": return "October";
-	        case "11": return "November";
-	        case "12": return "December";
-	        default: return "";
+	        case "1":
+	        case "01":
+	            return "January";
+	        case "2":
+	        case "02":
+	            return "February";
+	        case "3":
+	        case "03":
+	            return "March";
+	        case "4":
+	        case "04":
+	            return "April";
+	        case "5":
+	        case "05":
+	            return "May";
+	        case "6":
+	        case "06":
+	            return "June";
+	        case "7":
+	        case "07":
+	            return "July";
+	        case "8":
+	        case "08":
+	            return "August";
+	        case "9":
+	        case "09":
+	            return "September";
+	        case "10":
+	            return "October";
+	        case "11":
+	            return "November";
+	        case "12":
+	            return "December";
+	        default:
+	            return "";
 	    }
 	}
 

@@ -7,7 +7,6 @@
 <!--			<class name="tests.TextBoxTest" />-->
 <!--		</classes>-->
 <!--	</test>  SampleTestNG -->
-	
 <!--	 <parameter name="browser"  value="edge"/>-->
 	<test name="PraticeFormsTest">
 		<classes>
